@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
@@ -32,7 +33,8 @@ public class PlayerController : MonoBehaviour
         {
             case "Friendly": // do nothing. 
                 break;
-            default: Debug.Log("Dead");
+            default: SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                Debug.Log("Dead");
                 break;
         }
 
