@@ -8,11 +8,17 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
 
+    enum Status
+    {
+        Alive, Transcending, Dying
+    }
+
     #region PUBLIC VARIABLES
     [SerializeField]
     float thrustFactor = 20.0f;
     [SerializeField]
     float rotationFactor = 1.0f;
+    [SerializeField] Status status = Status.Alive;
     #endregion
 
     #region PRIVATE_VARIABLES
@@ -29,23 +35,47 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (status != Status.Alive) { return; }  // if not alive, no collision to be checked.
+
         switch (collision.gameObject.tag)
         {
             case "Friendly": // do nothing. 
                 break;
-            default: SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-                Debug.Log("Dead");
+
+            case "Finish":
+                status = Status.Transcending;
+                Invoke("GoToNextLevel", 1f);
+                break;
+            default:
+                status = Status.Dying;
+                Invoke("OnDeath", 1f);
                 break;
         }
 
         Debug.Log("Collision" + collision.gameObject.name);
     }
 
+    private void OnDeath()
+    {
+        // reset to initial level.
+        SceneManager.LoadScene(0);
+    }
+
+    private void GoToNextLevel()
+    {
+        // won the level.
+        SceneManager.LoadScene(1);
+       
+    }
+
     // Update is called once per frame
     void Update()
     {
-        Thrust();
-        RotatePlayer();
+        if (status == Status.Alive)
+        {
+            Thrust();
+            RotatePlayer();
+        }
     }
 
     private void Thrust()
@@ -53,7 +83,7 @@ public class PlayerController : MonoBehaviour
         // thrust handling
         if (Input.GetKey(KeyCode.Space))
         {
-            rb.AddRelativeForce(Vector3.up * thrustFactor*Time.deltaTime,ForceMode.Impulse);
+            rb.AddRelativeForce(Vector3.up * thrustFactor * Time.deltaTime, ForceMode.Impulse);
             if (!audioSource.isPlaying)
             {
                 audioSource.Play();
