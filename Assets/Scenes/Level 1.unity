@@ -1936,6 +1936,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: SceneLights
       objectReference: {fileID: 0}
+    - target: {fileID: 6780255776173613139, guid: a629ecc695f19004e91abc3f794232d0, type: 3}
+      propertyPath: m_Intensity
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6780255777993347220, guid: a629ecc695f19004e91abc3f794232d0, type: 3}
+      propertyPath: m_Intensity
+      value: 1.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a629ecc695f19004e91abc3f794232d0, type: 3}
 --- !u!1001 &8887422090757912853
