@@ -8,8 +8,10 @@ public class PlayerController : MonoBehaviour
 {
 
     #region PUBLIC VARIABLES
-    public float thrustFactor = 20.0f;
-    public float rotationFactor = 1.0f;
+    [SerializeField]
+    float thrustFactor = 20.0f;
+    [SerializeField]
+    float rotationFactor = 1.0f;
     #endregion
 
     #region PRIVATE_VARIABLES
@@ -22,6 +24,19 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        switch (collision.gameObject.tag)
+        {
+            case "Friendly": // do nothing. 
+                break;
+            default: Debug.Log("Dead");
+                break;
+        }
+
+        Debug.Log("Collision" + collision.gameObject.name);
     }
 
     // Update is called once per frame
