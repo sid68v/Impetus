@@ -14,11 +14,18 @@ public class PlayerController : MonoBehaviour
     }
 
     #region PUBLIC VARIABLES
-    [SerializeField]
-    float thrustFactor = 20.0f;
-    [SerializeField]
-    float rotationFactor = 1.0f;
+    [SerializeField] float thrustFactor = 20.0f;
+    [SerializeField] float rotationFactor = 1.0f;
+
     [SerializeField] Status status = Status.Alive;
+
+    [SerializeField] AudioClip thrustSound;
+    [SerializeField] AudioClip deathSound;
+    [SerializeField] AudioClip successSound;
+
+    [SerializeField] ParticleSystem thrustParticles;
+    [SerializeField] ParticleSystem deathParticles;
+    [SerializeField] ParticleSystem successParticles;
     #endregion
 
     #region PRIVATE_VARIABLES
@@ -41,21 +48,36 @@ public class PlayerController : MonoBehaviour
         {
             case "Friendly": // do nothing. 
                 break;
-
             case "Finish":
-                status = Status.Transcending;
-                Invoke("GoToNextLevel", 1f);
+                OnFinish();
                 break;
             default:
-                status = Status.Dying;
-                Invoke("OnDeath", 1f);
+                OnDeath();
                 break;
         }
+    }
 
-        Debug.Log("Collision" + collision.gameObject.name);
+    private void OnFinish()
+    {
+        audioSource.Stop();
+        audioSource.PlayOneShot(successSound);
+        successParticles.Play();
+
+        status = Status.Transcending;
+        Invoke("GoToNextLevel", 1f);
     }
 
     private void OnDeath()
+    {
+        audioSource.Stop();
+        audioSource.PlayOneShot(deathSound);
+        deathParticles.Play();
+
+        status = Status.Dying;
+        Invoke("ResetToInitialLevel", 1f);
+    }
+
+    private void ResetToInitialLevel()
     {
         // reset to initial level.
         SceneManager.LoadScene(0);
@@ -63,9 +85,17 @@ public class PlayerController : MonoBehaviour
 
     private void GoToNextLevel()
     {
+        int nextSceneIndex = SceneManager.GetActiveScene().buildIndex+1;
         // won the level.
-        SceneManager.LoadScene(1);
-       
+        if (nextSceneIndex != SceneManager.sceneCountInBuildSettings)
+        {
+            SceneManager.LoadScene(nextSceneIndex);
+        }
+        else
+        {
+            Debug.Log("You won the game !");
+        }
+
     }
 
     // Update is called once per frame
@@ -73,28 +103,36 @@ public class PlayerController : MonoBehaviour
     {
         if (status == Status.Alive)
         {
-            Thrust();
-            RotatePlayer();
+            HandleThrustInputs();
+            HandleRotateInputs();
         }
     }
 
-    private void Thrust()
+    private void HandleThrustInputs()
     {
         // thrust handling
         if (Input.GetKey(KeyCode.Space))
         {
-            rb.AddRelativeForce(Vector3.up * thrustFactor * Time.deltaTime, ForceMode.Impulse);
-            if (!audioSource.isPlaying)
-            {
-                audioSource.Play();
-            }
+            ApplyThrust();
         }
         else
         {
             audioSource.Stop();
+            thrustParticles.Stop();
         }
     }
-    private void RotatePlayer()
+
+    private void ApplyThrust()
+    {
+        rb.AddRelativeForce(Vector3.up * thrustFactor * Time.deltaTime, ForceMode.Impulse);
+        if (!audioSource.isPlaying)
+        {
+            audioSource.PlayOneShot(thrustSound);
+            thrustParticles.Play();
+        }
+    }
+
+    private void HandleRotateInputs()
     {
         rb.freezeRotation = true;
 
