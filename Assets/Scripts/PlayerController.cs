@@ -141,8 +141,7 @@ public class PlayerController : MonoBehaviour
 
     private void HandleRotateInputs()
     {
-        rb.freezeRotation = true;
-
+        rb.angularVelocity = Vector3.zero;
         // rotation handling
         if (Input.GetKey(KeyCode.A))
         {
@@ -154,8 +153,6 @@ public class PlayerController : MonoBehaviour
 
             transform.Rotate(Vector3.back * rotationFactor * Time.deltaTime);
         }
-
-        rb.freezeRotation = false;
     }
 
 
