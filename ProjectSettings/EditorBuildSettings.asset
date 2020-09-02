@@ -6,15 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Level 1.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 1
-    path: Assets/Scenes/Level 2.unity
+    path: Assets/Scenes/Level1_Thread the needle.unity
     guid: 481d7023ac092be488bd463e96925e0f
   - enabled: 1
-    path: Assets/Scenes/Level 3.unity
+    path: Assets/Scenes/Level2_Basic obstacles.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/Level3_Moving obstacles.unity
     guid: 08d60b6a3bd919f45afcd138d817bada
   - enabled: 1
-    path: Assets/Scenes/Level 4.unity
+    path: Assets/Scenes/Level4_In the dark - Basic obstacles.unity
     guid: 75e9dafb673e8884fa94501ad95df9c9
   m_configObjects: {}
