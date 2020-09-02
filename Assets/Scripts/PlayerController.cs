@@ -87,7 +87,8 @@ public class PlayerController : MonoBehaviour
     private void ResetToInitialLevel()
     {
         // reset to initial level.
-        SceneManager.LoadScene(0);
+        //SceneManager.LoadScene(0);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void GoToNextLevel()
@@ -141,7 +142,7 @@ public class PlayerController : MonoBehaviour
 
     private void HandleRotateInputs()
     {
-        rb.angularVelocity = Vector3.zero;
+        //rb.angularVelocity = Vector3.zero;
         // rotation handling
         if (Input.GetKey(KeyCode.A))
         {

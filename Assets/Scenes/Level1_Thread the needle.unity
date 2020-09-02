@@ -1419,14 +1419,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1801921857, guid: 447dd6e2a37dd4d45a4bcf7c1b8baca7, type: 3}
-      propertyPath: isHeadlightsOn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1801921857, guid: 447dd6e2a37dd4d45a4bcf7c1b8baca7, type: 3}
-      propertyPath: isImmortal
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5191955446701896185, guid: 447dd6e2a37dd4d45a4bcf7c1b8baca7, type: 3}
       propertyPath: m_LocalPosition.x
       value: -42.72
