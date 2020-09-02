@@ -26,6 +26,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] ParticleSystem thrustParticles;
     [SerializeField] ParticleSystem deathParticles;
     [SerializeField] ParticleSystem successParticles;
+
+    [SerializeField] bool isHeadlightsOn = false;
+    [SerializeField] bool isImmortal = false;
+    [SerializeField] GameObject vehicleLights;
     #endregion
 
     #region PRIVATE_VARIABLES
@@ -38,6 +42,9 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
+
+        vehicleLights.SetActive(isHeadlightsOn);
+       
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -51,7 +58,7 @@ public class PlayerController : MonoBehaviour
             case "Finish":
                 OnFinish();
                 break;
-            default:
+            default:if (isImmortal) return;
                 OnDeath();
                 break;
         }

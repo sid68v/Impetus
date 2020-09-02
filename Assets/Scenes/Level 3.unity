@@ -577,6 +577,7 @@ MonoBehaviour:
   oscillationAmplitude: 1
   oscillationPeriodInSeconds: 5
   oscillationDirection: {x: 0, y: 5, z: 0}
+  isOscillationOneSided: 0
 --- !u!1 &393328207 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5665287522470268276, guid: ebab104bdc25ddd40b87f74c79cd9d74, type: 3}
@@ -597,6 +598,7 @@ MonoBehaviour:
   oscillationAmplitude: 1
   oscillationPeriodInSeconds: 3
   oscillationDirection: {x: 2, y: 5, z: 0}
+  isOscillationOneSided: 0
 --- !u!4 &484004082 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 645636957519808598, guid: ebab104bdc25ddd40b87f74c79cd9d74, type: 3}
@@ -1609,6 +1611,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1801921857, guid: 447dd6e2a37dd4d45a4bcf7c1b8baca7, type: 3}
+      propertyPath: isHeadlightsOn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1801921857, guid: 447dd6e2a37dd4d45a4bcf7c1b8baca7, type: 3}
+      propertyPath: isImmortal
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5191955446701896185, guid: 447dd6e2a37dd4d45a4bcf7c1b8baca7, type: 3}
       propertyPath: m_LocalPosition.x
       value: -42.72
@@ -1679,6 +1689,7 @@ MonoBehaviour:
   oscillationAmplitude: 1
   oscillationPeriodInSeconds: 10
   oscillationDirection: {x: 25, y: 0, z: 0}
+  isOscillationOneSided: 0
 --- !u!1001 &2026493970
 PrefabInstance:
   m_ObjectHideFlags: 0
